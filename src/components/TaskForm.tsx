@@ -21,6 +21,18 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
     completed: false,
   });
 
+  const users = [
+    { id: 0, name: "John" },
+    { id: 1, name: "jack" },
+    { id: 2, name: "jill" },
+    { id: 3, name: "james" },
+    { id: 4, name: "jane" },
+    { id: 5, name: "josh" },
+    { id: 6, name: "joe" },
+    { id: 7, name: "jim" },
+    { id: 8, name: "jake" },
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onAddTask(task);
@@ -52,6 +64,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
             className="border border-gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
             value={task.name}
             onChange={(e) => setTask({ ...task, name: e.target.value })}
+            placeholder="Enter task name"
             required
           />
         </div>
@@ -62,14 +75,24 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
           >
             Assigned To
           </label>
-          <input
-            type="text"
+          <select
             id="assigned-to"
             className="border border-gray-300 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm"
             value={task.assignedTo}
             onChange={(e) => setTask({ ...task, assignedTo: e.target.value })}
             required
-          />
+          >
+            <option value="">Select User</option>
+            {users.map((user) => (
+              <option
+                className="text-sm font-medium text-white-700"
+                key={user.id}
+                value={user.name}
+              >
+                {user.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-4">
           <label
@@ -88,12 +111,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
           />
         </div>
         <div className="flex items-center justify-end">
-          <button
-            type="button"
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-2"
-          >
-            Cancel
-          </button>
           <button
             type="submit"
             className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
