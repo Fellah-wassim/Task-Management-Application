@@ -23,14 +23,15 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     onAddTask(task);
-    setTask({
-      id: 0,
-      name: "",
-      assignedTo: "",
-      dueDate: "",
-      completed: false,
+    setTask((prevTask) => {
+      return {
+        id: prevTask.id + 1,
+        name: "",
+        assignedTo: "",
+        dueDate: "",
+        completed: false,
+      };
     });
   };
 
@@ -41,7 +42,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
         <div className="mb-4">
           <label
             htmlFor="task-name"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-white-700"
           >
             Task Name
           </label>
@@ -57,7 +58,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
         <div className="mb-4">
           <label
             htmlFor="assigned-to"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-white-700"
           >
             Assigned To
           </label>
@@ -73,7 +74,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
         <div className="mb-4">
           <label
             htmlFor="due-date"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-white-700"
           >
             Due Date
           </label>
