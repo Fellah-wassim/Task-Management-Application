@@ -6,28 +6,6 @@ import Navigation from "../components/navigation/Navigation";
 import Tasks from "../components/Tasks";
 
 const DashboardPage: React.FC = () => {
-  const tasks = [
-    {
-      id: 1,
-      title: "Task 1",
-      dueDate: "2023-06-30",
-      status: "Pending",
-      priority: "High",
-    },
-    {
-      id: 2,
-      title: "Task 2",
-      dueDate: "2023-07-15",
-      status: "Completed",
-      priority: "Low",
-    },
-  ];
-
-  const projects = [
-    { id: 1, title: "Project 1", description: "Description of Project 1" },
-    { id: 2, title: "Project 2", description: "Description of Project 2" },
-  ];
-
   return (
     <BrowserRouter>
       <div className="flex w-screen h-screen overflow-hidden">
