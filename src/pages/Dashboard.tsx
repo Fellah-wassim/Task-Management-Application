@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Sidebar from "../components/Sidebar";
 import Navigation from "../components/navigation/Navigation";
-import Tasks from "../components/Tasks";
+import Tasks from "../components/tasks/Tasks";
 
 const DashboardPage: React.FC = () => {
   return (
