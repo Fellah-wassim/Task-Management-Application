@@ -1,7 +1,12 @@
 import React from "react";
 
+interface popup {
+  show: boolean;
+  message: string;
+}
+
 interface ShowPopupProps {
-  setShowPopup: (showPopup: boolean) => void;
+  setShowPopup: (showPopup: popup) => void;
   message: string;
 }
 
@@ -16,7 +21,7 @@ export const ShowPopup: React.FC<ShowPopupProps> = ({
           <p className="text-gray-600 text-2xl">{message}</p>
           <button
             className="mt-2 px-4 py-2 bg-indigo-500 text-white rounded-md"
-            onClick={() => setShowPopup(false)}
+            onClick={() => setShowPopup({ show: false, message: "" })}
           >
             Close
           </button>
