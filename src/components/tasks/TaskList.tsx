@@ -109,7 +109,7 @@ const TaskList: React.FC<TaskListProps> = ({
                   <strong className="text-lg">{task.name}</strong>
                 )}
 
-                <div className="flex items-center justify-start gap-2 text-white-600 p-2">
+                <div className="flex items-center justify-start gap-2 text-white-600 p-2 max-sm:flex-col max-sm:items-start">
                   Assigned to:
                   {editingTask.state && editingTask.id == task.id ? (
                     <Select onAssignedToChange={handleAssignedToChange} />
@@ -129,7 +129,7 @@ const TaskList: React.FC<TaskListProps> = ({
                   )}
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center p-3 space-x-2 max-sm:space-x-0 max-sm:flex-col max-sm:gap-3 max-sm:justify-center">
                 {editingTask.state && editingTask.id == task.id ? (
                   <>
                     <button
