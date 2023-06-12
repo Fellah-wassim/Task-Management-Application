@@ -33,40 +33,52 @@ const user = {
   role: "Admin",
 };
 
-const Sidebar: React.FC = () => {
-  return (
-    <div className="w-[250px] h-[100vh] bg-gray-200 text-gray-800 p-4">
-      <div key={user.id} className="flex items-center space-x-2 mb-4">
-        <div className="w-10 h-10 bg-gray-400 rounded-full overflow-hidden">
-          <img src="/john-doe.jpg" alt="user pic" />
-        </div>
-        <div className="flex flex-col">
-          <div className="font-semibold">{user.name}</div>
-          <div className="text-sm text-gray-600">{user.role}</div>
-        </div>
-      </div>
-      <div className="border border-gray-400 mb-4"></div>
+interface SidebarProps {
+  isOpen: boolean;
+}
 
-      <ul>
-        {sidebarData.map((val, key) => {
-          return (
-            <li
-              className={`p-2 cursor-pointer hover:bg-gray-300 ${
-                window.location.pathname === val.link ? "bg-gray-300" : ""
-              }`}
-              key={key}
-              onClick={() => {
-                window.location.pathname = val.link;
-              }}
-            >
-              <div className="flex items-center space-x-4">
-                <div>{val.icon}</div>
-                <div>{val.title}</div>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+  return (
+    <div>
+      {isOpen && (
+        <div
+          className={`w-[250px] h-[100vh] bg-gray-200 text-gray-800 p-4 max-md:fixed top-0 left-0 ${
+            isOpen ? "max-md:pt-[80px]" : "-left-full"
+          } md:left-0 transition-all duration-300 ease-in-out`}
+        >
+          <div key={user.id} className="flex items-center space-x-2 mb-4">
+            <div className="w-10 h-10 bg-gray-400 rounded-full overflow-hidden">
+              <img src="/john-doe.jpg" alt="user pic" />
+            </div>
+            <div className="flex flex-col">
+              <div className="font-semibold">{user.name}</div>
+              <div className="text-sm text-gray-600">{user.role}</div>
+            </div>
+          </div>
+          <div className="border border-gray-400 mb-4"></div>
+
+          <ul>
+            {sidebarData.map((val, key) => {
+              return (
+                <li
+                  className={`p-2 cursor-pointer hover:bg-gray-300 ${
+                    window.location.pathname === val.link ? "bg-gray-300" : ""
+                  }`}
+                  key={key}
+                  onClick={() => {
+                    window.location.pathname = val.link;
+                  }}
+                >
+                  <div className="flex items-center space-x-4">
+                    <div>{val.icon}</div>
+                    <div>{val.title}</div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
