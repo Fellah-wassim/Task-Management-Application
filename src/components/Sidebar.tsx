@@ -5,11 +5,11 @@ import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import SettingsIcon from "@mui/icons-material/Settings";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 
-const sidebarData = [
+const sidebarData: SidebarData[] = [
   {
     title: "Home",
     icon: <HomeWorkIcon />,
-    link: "/dashboard",
+    link: "/",
   },
   {
     title: "Tasks",
@@ -38,11 +38,35 @@ interface SidebarProps {
   isOpen: boolean;
 }
 
+interface SidebarData {
+  title: string;
+  icon: JSX.Element;
+  link: string;
+}
+
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const [valueLink, setValueLink] = useState(window.location.pathname);
 
-  const handleLinkClick = (link: string) => {
-    setValueLink(link);
+  const faviconElement = document.getElementById("favicon");
+
+  const title =
+    window.location.pathname.replace("/", "").charAt(0).toUpperCase() +
+    window.location.pathname.replace("/", "").slice(1);
+  document.title = `${title ? title : "Home"} | Task Management App`;
+  faviconElement?.setAttribute(
+    "href",
+    `public/${title ? title.toLowerCase() : "home"}.png`
+  );
+
+  const handleLinkClick = (val: SidebarData) => {
+    setValueLink(val.link);
+    const title = val.title;
+    document.title = `${title} | Task Management App`;
+
+    faviconElement?.setAttribute(
+      "href",
+      `public/${val.title.toLowerCase()}.png`
+    );
   };
 
   return (
@@ -67,7 +91,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           <ul>
             {sidebarData.map((val, key) => {
               return (
-                <Link to={val.link} onClick={() => handleLinkClick(val.link)}>
+                <Link to={val.link} onClick={() => handleLinkClick(val)}>
                   <li
                     className={`p-2 cursor-pointer hover:bg-gray-300 ${
                       valueLink === val.link ? "bg-gray-300" : ""
