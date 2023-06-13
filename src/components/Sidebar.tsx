@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -38,6 +39,12 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+  const [valueLink, setValueLink] = useState(window.location.pathname);
+
+  const handleLinkClick = (link: string) => {
+    setValueLink(link);
+  };
+
   return (
     <div>
       {isOpen && (
@@ -60,20 +67,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           <ul>
             {sidebarData.map((val, key) => {
               return (
-                <li
-                  className={`p-2 cursor-pointer hover:bg-gray-300 ${
-                    window.location.pathname === val.link ? "bg-gray-300" : ""
-                  }`}
-                  key={key}
-                  onClick={() => {
-                    window.location.pathname = val.link;
-                  }}
-                >
-                  <div className="flex items-center space-x-4">
-                    <div>{val.icon}</div>
-                    <div>{val.title}</div>
-                  </div>
-                </li>
+                <Link to={val.link} onClick={() => handleLinkClick(val.link)}>
+                  <li
+                    className={`p-2 cursor-pointer hover:bg-gray-300 ${
+                      valueLink === val.link ? "bg-gray-300" : ""
+                    }`}
+                    key={key}
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div>{val.icon}</div>
+                      <div>{val.title}</div>
+                    </div>
+                  </li>
+                </Link>
               );
             })}
           </ul>
